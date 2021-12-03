@@ -38,7 +38,7 @@ img.src="images/image1.jpg";
 document.body.append(img);
 
 button1.onclick = function(){
-    for (var i = 0; i<9;i++){
+    for (var i = 0; i<8;i++){
     img.src="images/image"+[i]+".jpg";
     }
 }
