@@ -33,12 +33,66 @@ var button5 = document.createElement('button');
 button5.textContent="Ускорение смены рисунков";
 document.body.append(button5);
 
-var img = document.createElement('img');
-img.src="images/image1.jpg";
-document.body.append(img);
+const imgs = document.getElementById('imgs')
 
-button1.onclick = function(){
-    for (var i = 0; i<8;i++){
-    img.src="images/image"+[i]+".jpg";
+const img = document.querySelectorAll ('#imgs img')
+
+let index = 0;
+
+let interval;
+let fast_interval;
+
+button1.addEventListener('click', ()=>{
+    clearInterval(fast_interval);
+    interval= setInterval(run,5000);
+})
+
+button2.addEventListener('click', ()=>{
+    stop();
+})
+
+button3.addEventListener('click',() => {
+    index++;
+    changeImage();
+    resetInterval();
+})
+
+button4.addEventListener('click',()=>{
+    index--;
+    changeImage();
+    resetInterval();
+})
+
+button5.addEventListener('click', ()=>{
+    clearInterval(interval);
+    fast_interval = setInterval(run,2000);
+})
+
+function changeImage(){
+
+    if(index > img.length -1 ){
+        index = 0;
     }
+    else if (index < 0 ){
+        index = img.length -1
+    }
+
+    imgs.style.transform = `translateX(${-index * 500}px)`;
+}
+
+function resetInterval(){
+    clearInterval(interval);
+    interval = setInterval(run,5000);
+}
+
+function stop(){
+    
+    clearInterval(interval);
+
+    clearInterval(fast_interval);
+}
+
+function run(){
+    index++;
+    changeImage();
 }
